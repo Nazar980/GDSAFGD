@@ -5,7 +5,6 @@ import com.zergatul.cheatutils.modules.utilities.RenderUtilities;
 import com.zergatul.cheatutils.render.Color2dRenderer;
 import com.zergatul.cheatutils.render.MainFrameBuffer;
 import com.zergatul.cheatutils.render.Primitives;
-import com.zergatul.cheatutils.render.gl.GlStateTracker;
 import com.zergatul.cheatutils.utils.ItemUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
@@ -203,8 +202,7 @@ public class ContainerSummaryController {
             int yo = y;
             int fullWidth = width + H_PADDING * 2;
 
-            GlStateTracker.save(GlStateTracker.PROGRAM);
-            MainFrameBuffer.enter();
+            MainFrameBuffer.bind();
 
             Matrix4f matrix = new Matrix4f();
             matrix.ortho(
@@ -222,9 +220,6 @@ public class ContainerSummaryController {
                 renderer.rect(x, yo + ItemDrawable.HEIGHT * i, fullWidth, 1, 1, 1, 1, 1);
             }
             renderer.end(matrix);
-
-            MainFrameBuffer.exit();
-            GlStateTracker.restore(GlStateTracker.PROGRAM);
 
             for (ItemDrawable drawable : list) {
                 y += drawable.draw(graphics, font, itemRenderer, player, x + (width - drawable.width) / 2 + H_PADDING, y + 2);
