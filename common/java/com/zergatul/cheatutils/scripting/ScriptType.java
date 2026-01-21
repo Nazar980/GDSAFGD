@@ -5,7 +5,11 @@ import com.zergatul.cheatutils.configs.ConfigStore;
 import com.zergatul.cheatutils.scripting.events.BlockEspConsumer;
 import com.zergatul.cheatutils.scripting.events.BlockPosConsumer;
 import com.zergatul.cheatutils.scripting.events.EntityEspConsumer;
+import com.zergatul.cheatutils.scripting.events.ServerInformation;
+import com.zergatul.cheatutils.scripting.modules.BlockEspEvent;
+import com.zergatul.cheatutils.scripting.modules.EntityEspEvent;
 import com.zergatul.cheatutils.scripting.modules.PacketEvent;
+import com.zergatul.cheatutils.scripting.modules.PlayerMessageSendingEvent;
 import com.zergatul.cheatutils.scripting.types.*;
 import com.zergatul.cheatutils.scripting.types.json.*;
 import com.zergatul.cheatutils.scripting.types.nbt.*;
@@ -102,6 +106,7 @@ public enum ScriptType {
                 .addCustomType(Match.class)
                 .addCustomType(MatchGroup.class)
                 .addCustomType(MatchGroups.class)
+                .addCustomType(BoundingBox.class)
                 .addCustomType(ComponentWrapper.class)
                 .addCustomType(FormattedTextComponent.class)
                 .addCustomType(StyleWrapper.class)
@@ -121,8 +126,7 @@ public enum ScriptType {
                         ListTagWrapper.class,
                         CompoundTagWrapper.class,
                         IntArrayTagWrapper.class,
-                        LongArrayTagWrapper.class
-                ))
+                        LongArrayTagWrapper.class))
                 .addCustomTypes(List.of(
                         JsonElementWrapper.class,
                         JsonInvalidWrapper.class,
@@ -131,10 +135,14 @@ public enum ScriptType {
                         JsonNumberWrapper.class,
                         JsonStringWrapper.class,
                         JsonArrayWrapper.class,
-                        JsonObjectWrapper.class
-                ))
+                        JsonObjectWrapper.class))
                 .addCustomTypes(List.of(UUIDWrapper.class))
-                .addCustomType(PacketEvent.class)
+                .addCustomTypes(List.of(
+                        BlockEspEvent.class,
+                        EntityEspEvent.class,
+                        PacketEvent.class,
+                        ServerInformation.class,
+                        PlayerMessageSendingEvent.class))
                 .setInterface(funcInterface)
                 .setAsyncReturnType(asyncReturnType)
                 .setPolicy(new JavaInteropPolicy() {

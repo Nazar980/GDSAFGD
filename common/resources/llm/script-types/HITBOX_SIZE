@@ -1,0 +1,3 @@
+This script allows to decide if module should apply hitbox change to specific entity.
+Use `id` variable of type `int` to see id of the current entity.
+Return `true` if module should alter entity hitbox, return `false` if it is not.

@@ -1,0 +1,26 @@
+All available APIs defined below as "static EspApi esp { get; }" are accessible from the scripts.
+You don't need to "import" anything.
+
+Most API methods have internal validations, and should be safe to use (meaning they shouldn't throw exceptions).
+Even for reference types they shouldn't return null, but some sort of default value, or value that can be considered invalid.
+For example, you can call `inventory.getHotbarItem(-100)` and method will return empty `ItemStack` instance.
+Even if some script manages to call it while no world is loaded, and LocalPlayer instance doesn't exist - it still returns empty `ItemStack`.
+For methods returning `string` default value is empty string.
+All API methods never expect `null` to be passed as parameter. This was done to make scripting more beginner friendly.
+
+Some APIs or methods are restricted for specific script types.
+For example:
+- you can only use `overlay` API from Status Overlay script
+- you can only use `blockAutomation` API from Block Automation script
+- you can only use APIs that doesn't change state of the mod or Minecraft itself from these scripts:
+    - Block Automation
+    - Block ESP
+    - Entity ESP
+    - Hitbox Size
+    - Kill Aura
+    - Status Overlay
+    - Villager Roller
+This was done to prevent potential issues. For example, Block Automation script is getting called every tick for every block position in block interaction range. Imagine if someone by mistake called `player.attack` method. This would cause sending thousands of attack packets per second.
+The exception for this rule can be `variables` API. You can set variables from any script.
+
+If you need 2 scripts interact with each other you can use `variables` API. It allows to get/set variables of different types, and access them from all scripts. If some variable wasn't defined before, `get` method returns default value for corresponding type.
