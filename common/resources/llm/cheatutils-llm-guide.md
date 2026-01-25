@@ -14,8 +14,9 @@ Main thread
 
 Because of this:
 - Avoid heavy computation in per-frame / per-tick scripts
-- Avoid long loops without delays
-- Prefer throttling logic (run every N ticks)
+- Avoid heavy loops that are not normal for Minecraft. Examples:
+    - it is ok to iterate over all entities every frame, inside Status Overlay script, since Minecraft itself does this a lot
+    - it is not ok to iterate over all entities from Entity ESP script, since this may cause O(n^2) complexity
 
 ## 2. Script types and how they execute
 Each script has a fixed signature, execution frequency, and API restrictions.
@@ -167,23 +168,7 @@ Use it for:
 
 Do not rely on globals or static initialization order.
 
-## 7. Performance rules (LLM-critical)
-High-frequency scripts (Overlay, ESP, Block Automation, predicates)
-- No world scans
-- No entity enumeration
-- No large allocations
-- No string concatenation in loops
-- Prefer cached values and simple math
-
-Throttling pattern
-```ts
-static int lastTick = 0;
-int tick = game.getTick();
-if (tick - lastTick < 20) return;
-lastTick = tick;
-```
-
-## 8. API safety and default values
+## 7. API safety and default values
 CheatUtils APIs are designed to be null-safe and beginner-friendly.
 
 General guarantees:
@@ -236,7 +221,7 @@ You should still validate:
 - semantic correctness (e.g. `id > 0`)
 - logical conditions (e.g. `isEnabled()`, `hasItemAtSlot()`)
 
-## 9. Java interop and obfuscation (temporary)
+## 8. Java interop and obfuscation (temporary)
 Current situation (Minecraft 1.21.11)
 - Fabric runtime uses obfuscated class names
 - Java interop code may differ between loaders
@@ -250,7 +235,7 @@ Guidelines:
 - Prefer CheatUtils APIs over raw Java access
 - Expect this section to be removed in future versions
 
-## 10. Recommended defaults for generated scripts
+## 9. Recommended defaults for generated scripts
 When generating a script, prefer to include:
 - Early guards
 - Safe exit conditions
@@ -262,7 +247,7 @@ Avoid:
 - Silent failures
 - Hard-coded magic numbers without comments
 
-## 11. Final checklist for LLM-generated scripts
+## 10. Final checklist for LLM-generated scripts
 Before returning a script, ensure:
 - Script type is identified and correct
 - API visibility rules are respected

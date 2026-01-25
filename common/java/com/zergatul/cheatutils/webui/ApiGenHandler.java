@@ -58,18 +58,6 @@ public class ApiGenHandler implements HttpHandler {
         lines.add(String.format("// Scripting Language Source: https://github.com/Zergatul/java-scripting-language @ %s", commits.get("java-scripting-language")));
         lines.add("// ==========================================");
 
-        try (InputStream stream = ResourceHelper.get("llm/GENERAL")) {
-            String content = IOUtils.toString(stream, StandardCharsets.UTF_8);
-            lines.add("");
-            lines.add("/*");
-            for (String line : extractLines(content)) {
-                lines.add("* " + line);
-            }
-            lines.add("*/");
-        } catch (IOException e) {
-            // do nothing
-        }
-
         lines.add("");
         lines.add("// --- Script Types ---");
         for (ScriptType type : ScriptType.values()) {
