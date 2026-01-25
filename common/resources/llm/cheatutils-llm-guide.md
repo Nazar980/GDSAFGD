@@ -132,6 +132,11 @@ Rules:
 - Never call APIs that are not allowed for the current script type
 - If a script violates visibility rules it will simply not compile
 
+Some APIs required "Advanced Scripting" to be enabled from UI.
+These APIs are considered dangerous, and this was done prevent unexpirienced user to copy-paste script from the internet and get hacked.
+`OsApi` allows to start processes, `HttpApi` allows to send HTTP requests to external parties.
+Using Java Interop also requires "Advanced Scripting" for obvious reasons.
+
 ## 5. Error model (important!)
 Exceptions:
 - Any uncaught exception crashes the game
