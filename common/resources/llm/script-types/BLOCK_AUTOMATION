@@ -5,4 +5,3 @@ If script calls `blockAutomation.useItem(...)` or `blockAutomation.breakBlock(..
 Some items require player to look in the correct direction to be used.
 These items send another packet to the server and are not supported by block automation.
 Example: filling/emptying bucket or glass bottle.
-You can't use any action-like API methods from this script, only readonly methods are allowed.

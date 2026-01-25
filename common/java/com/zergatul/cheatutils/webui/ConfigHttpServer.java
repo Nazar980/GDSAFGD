@@ -62,7 +62,8 @@ public class ConfigHttpServer {
         server.createContext("/assets/", new AssetsHandler());
         server.createContext("/textures/", new TexturesHandler());
         server.createContext("/local/", new LocalFilesHandler());
-        server.createContext("/llm.txt", new LlmDocHandler());
+        server.createContext("/llm/cheatutils-llm-guide.md", new LargeLanguageModelGuideHandler());
+        server.createContext("/llm/cheatutils-api.txt", new ApiGenHandler());
         server.createContext("/", new StaticFilesHandler());
 
         server.setExecutor(null);

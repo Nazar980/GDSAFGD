@@ -23,70 +23,89 @@ import java.lang.reflect.Method;
 import java.util.List;
 
 public enum ScriptType {
+
     KEYBINDING(
-            new ApiType[] { ApiType.ACTION, ApiType.UPDATE },
-            AsyncRunnable.class,
-            "KeyBindingScript",
-            SVoidType.instance),
+            new Builder()
+                    .setApis(ApiType.ACTION, ApiType.UPDATE)
+                    .setInterface(AsyncRunnable.class, SVoidType.instance)
+                    .setScriptClassName("KeyBindingScript")
+                    .setModuleName("Key Bindings")),
 
     OVERLAY(
-            new ApiType[] { ApiType.OVERLAY },
-            Runnable.class,
-            "StatusOverlayScript"),
+            new Builder()
+                    .setApis(ApiType.OVERLAY)
+                    .setInterface(Runnable.class)
+                    .setScriptClassName("StatusOverlayScript")
+                    .setModuleName("Status Overlay")),
 
     BLOCK_AUTOMATION(
-            new ApiType[] { ApiType.BLOCK_AUTOMATION },
-            BlockPosConsumer.class,
-            "BlockAutomationScript"),
+            new Builder()
+                    .setApis(ApiType.BLOCK_AUTOMATION)
+                    .setInterface(BlockPosConsumer.class)
+                    .setScriptClassName("BlockAutomationScript")
+                    .setModuleName("Block Automation")),
 
     VILLAGER_ROLLER(
-            new ApiType[] { ApiType.VILLAGER_ROLLER, ApiType.LOGGING },
-            Runnable.class,
-            "VillagerRollerScript"),
+            new Builder()
+                    .setApis(ApiType.VILLAGER_ROLLER, ApiType.LOGGING)
+                    .setInterface(Runnable.class)
+                    .setScriptClassName("VillagerRollerScript")
+                    .setModuleName("Villager Roller")),
 
     EVENTS(
-            new ApiType[] { ApiType.ACTION, ApiType.UPDATE, ApiType.EVENTS },
-            Runnable.class,
-            "EventsScripting"),
+            new Builder()
+                    .setApis(ApiType.ACTION, ApiType.UPDATE, ApiType.EVENTS)
+                    .setInterface(Runnable.class)
+                    .setScriptClassName("EventsScripting")
+                    .setModuleName("Events Scripting")),
 
     BLOCK_ESP(
-            new ApiType[] { ApiType.CURRENT_BLOCK_ESP },
-            BlockEspConsumer.class,
-            "BlockEspScript"),
+            new Builder()
+                    .setApis(ApiType.CURRENT_BLOCK_ESP)
+                    .setInterface(BlockEspConsumer.class)
+                    .setScriptClassName("BlockEspScript")
+                    .setModuleName("Block ESP")),
 
     ENTITY_ESP(
-            new ApiType[] { ApiType.CURRENT_ENTITY_ESP },
-            EntityEspConsumer.class,
-            "EntityEspScript"),
+            new Builder()
+                    .setApis(ApiType.CURRENT_ENTITY_ESP)
+                    .setInterface(EntityEspConsumer.class)
+                    .setScriptClassName("EntityEspScript")
+                    .setModuleName("Entity ESP")),
 
     KILL_AURA(
-            new ApiType[0],
-            KillAuraFunction.class,
-            "KillAuraScript"),
+            new Builder()
+                    .setInterface(KillAuraFunction.class)
+                    .setScriptClassName("KillAuraScript")
+                    .setModuleName("Kill Aura")),
 
     HITBOX_SIZE(
-            new ApiType[0],
-            HitboxSizeFunction.class,
-            "HitboxSizeScript");
+            new Builder()
+                    .setInterface(HitboxSizeFunction.class)
+                    .setScriptClassName("HitboxSizeScript")
+                    .setModuleName("Hitbox Size"));
 
     private final ApiType[] apis;
     private final Class<?> funcInterface;
-    private final String name;
     private final SType asyncReturnType;
+    private final String scriptClassName;
+    private final String moduleName;
 
-    ScriptType(ApiType[] apis, Class<?> funcInterface, String name) {
-        this(apis, funcInterface, name, null);
-    }
-
-    ScriptType(ApiType[] apis, Class<?> funcInterface, String name, SType asyncReturnType) {
-        this.apis = apis;
-        this.funcInterface = funcInterface;
-        this.name = name;
-        this.asyncReturnType = asyncReturnType;
+    ScriptType(Builder builder) {
+        builder.build();
+        this.apis = builder.apis;
+        this.funcInterface = builder.funcInterface;
+        this.asyncReturnType = builder.asyncReturnType;
+        this.scriptClassName = builder.scriptClassName;
+        this.moduleName = builder.moduleName;
     }
 
     public ApiType[] getApis() {
         return apis;
+    }
+
+    public String getModuleName() {
+        return moduleName;
     }
 
     public CompilationParameters createParameters() {
@@ -166,10 +185,61 @@ public enum ScriptType {
                         return ModMain.class.getClassLoader();
                     }
                 })
-                .setMainClassName(name)
-                .setSourceFile("<" + name + ">")
+                .setMainClassName(scriptClassName)
+                .setSourceFile("<" + scriptClassName + ">")
                 .emitLineNumbers(true)
                 .emitVariableNames(true)
                 .build();
+    }
+
+    private static class Builder {
+
+        private ApiType[] apis = new ApiType[0];
+        private Class<?> funcInterface;
+        private SType asyncReturnType;
+        private String scriptClassName;
+        private String moduleName;
+
+        public void build() {
+            if (apis == null) {
+                throw new IllegalStateException();
+            }
+            if (funcInterface == null) {
+                throw new IllegalStateException();
+            }
+            if (scriptClassName == null) {
+                throw new IllegalStateException();
+            }
+            if (moduleName == null) {
+                throw new IllegalStateException();
+            }
+        }
+
+        public Builder setApis(ApiType... apis) {
+            this.apis = apis;
+            return this;
+        }
+
+        public Builder setInterface(Class<?> funcInterface) {
+            this.funcInterface = funcInterface;
+            this.asyncReturnType = null;
+            return this;
+        }
+
+        public Builder setInterface(Class<?> funcInterface, SType asyncReturnType) {
+            this.funcInterface = funcInterface;
+            this.asyncReturnType = asyncReturnType;
+            return this;
+        }
+
+        public Builder setScriptClassName(String name) {
+            this.scriptClassName = name;
+            return this;
+        }
+
+        public Builder setModuleName(String name) {
+            this.moduleName = name;
+            return this;
+        }
     }
 }
