@@ -26,7 +26,7 @@ jobs:
           distribution: temurin
           java-version: 21
 
-                - name: Build Annotation Processor
+      - name: Build Annotation Processor
         run: |
           pushd ./mixin-plugin/annotation-processor
           chmod +x ./gradlew
@@ -53,6 +53,7 @@ jobs:
           path: ./fabric/build/libs/*.jar
           compression-level: 0
           if-no-files-found: error
+
 
 
 
