@@ -6,6 +6,9 @@ on:
       - '1.21'
       - '1.21.[1-9]'
       - '1.21.1[0-9]'
+    
+  pull_request:
+  workflow_dispatch:
 
 jobs:
   build:
@@ -73,4 +76,5 @@ jobs:
           name: neoforge
           path: ./neoforge/build/libs/*.jar
           compression-level: 0
+
           if-no-files-found: error
