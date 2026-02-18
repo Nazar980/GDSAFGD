@@ -1,0 +1,62 @@
+package com.zergatul.cheatutils;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+
+public class ConfigPresetLoader {
+
+    // ← путь до cheatutils.json
+    public static Path getConfigPath() {
+        return Path.of("config", "cheatutils.json");
+    }
+
+    public static void applyPreset() {
+        try {
+            Path path = getConfigPath();
+            Files.createDirectories(path.getParent());
+            Files.writeString(path, PRESET_JSON);
+            System.out.println("[CheatUtils] Preset config applied.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // ТВОЙ КОНФИГ
+    private static final String PRESET_JSON = """
+    {
+      "fullBrightConfig": { "enabled": false },
+      "autoFishConfig": { "autoRestartOnIdle": false, "idleTimeout": 60, "enabled": false },
+      "armorOverlayConfig": { "enabled": false },
+      "blocks": { "configs": [] },
+      "entities": {
+        "configs": [
+          {
+            "clazz": "net.minecraft.world.entity.player.Player",
+            "glow": false,
+            "glowColor": -1,
+            "outlineMethod": 0,
+            "drawOverlay": true,
+            "overlayColor": -2130706433,
+            "drawTitles": false,
+            "showDefaultNames": false,
+            "useRawNames": false,
+            "showHp": false,
+            "showEquippedItems": false,
+            "showOwner": false,
+            "scriptEnabled": false,
+            "enabled": true,
+            "drawTracers": false,
+            "tracerWidth": 1,
+            "tracerColor": -1,
+            "drawOutline": true,
+            "outlineWidth": 1,
+            "outlineColor": -1,
+            "maxDistance": 1000.0
+          }
+        ]
+      }
+      // …и весь остальной JSON
+    }
+    """;
+}
