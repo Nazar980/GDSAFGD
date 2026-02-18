@@ -3,6 +3,7 @@ package com.zergatul.cheatutils.configs;
 import com.zergatul.cheatutils.configs.adapters.GsonSkip;
 import com.zergatul.cheatutils.scripting.events.EntityEspConsumer;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
 
 import java.awt.*;
 
@@ -76,16 +77,31 @@ public class EntityEspConfig extends EspConfigBase {
     public static EntityEspConfig createDefault(Class<?> clazz) {
         EntityEspConfig config = new EntityEspConfig();
         config.clazz = clazz;
-        config.enabled = false;
+
+        // ---------- АВТО ESP ДЛЯ ИГРОКОВ ----------
+        if (Player.class.isAssignableFrom(clazz)) {
+            config.enabled = true;
+            config.glow = true;
+            config.drawOverlay = true;
+        } else {
+            config.enabled = false;
+            config.glow = true;
+            config.drawOverlay = false;
+        }
+        // ------------------------------------------
+
         config.drawTracers = true;
         config.tracerColor = Color.WHITE;
+
         config.drawOutline = true;
         config.outlineColor = Color.WHITE;
+
         config.maxDistance = DefaultMaxDistance;
-        config.glow = true;
+
         config.glowColor = Color.WHITE;
-        config.drawOverlay = false;
+
         config.overlayColor = new Color(0x80FFFFFF, true);
+
         return config;
     }
 }
