@@ -8,7 +8,7 @@ const modules = {
     hacks: {},
     visuals: {},
     scripting: {},
-    utility: {}
+    utility: {},
     special: {}
 };
 
@@ -690,3 +690,4 @@ module({
 
 
 export { modules }
+
