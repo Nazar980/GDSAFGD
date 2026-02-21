@@ -1,9 +1,13 @@
 import * as http from '/http.js'
 import { getComponent } from '/components/Loader.js'
-
 const modules = {
     all: [],
-    esp: {}
+    automation: {},
+    esp: {},
+    hacks: {},
+    visuals: {},
+    scripting: {},
+    utility: {}
 };
 
 const module = (params) => {
@@ -139,7 +143,7 @@ module({
 });
 module({
     group: 'esp',
-    name: 'entity esp',
+    name: 'Хитбоксы Игроков',
     component: 'EntityESP',
     path: 'entity-esp',
     tags: ['entity', 'entities', 'esp']
@@ -684,6 +688,7 @@ module({
 
 
 export { modules }
+
 
 
 
