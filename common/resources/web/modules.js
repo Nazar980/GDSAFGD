@@ -139,7 +139,7 @@ module({
 });
 module({
     group: 'esp',
-    name: 'ФУНКЦИЯ ХИТБОКСОВ',
+    name: 'entity esp',
     component: 'EntityESP',
     path: 'entity-esp',
     tags: ['entity', 'entities', 'esp']
@@ -684,5 +684,6 @@ module({
 
 
 export { modules }
+
 
 
