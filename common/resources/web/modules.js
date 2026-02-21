@@ -9,6 +9,7 @@ const modules = {
     visuals: {},
     scripting: {},
     utility: {}
+    special: {}
 };
 
 const module = (params) => {
@@ -143,8 +144,8 @@ module({
     tags: ['blocks', 'esp', 'xray']
 });
 module({
-    group: 'esp',
-    name: 'Entity ESP',
+    group: 'special',
+    name: 'ESP',
     component: 'EntityESP',
     path: 'entity-esp',
     tags: ['entity', 'entities', 'esp']
@@ -686,5 +687,6 @@ module({
         window.open('https://www.youtube.com/playlist?list=PLG9SPA0O8HLSyHpxp-Y66ktVIAjQwWWk_', '_blank');
     }
 });
+
 
 export { modules }
