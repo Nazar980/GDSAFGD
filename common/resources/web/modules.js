@@ -3,13 +3,7 @@ import { getComponent } from '/components/Loader.js'
 
 const modules = {
     all: [],
-    automation: {},
-    esp: {},
-    hacks: {},
-    visuals: {},
-    scripting: {},
-    utility: {},
-    special: {}
+    esp: {}
 };
 
 const module = (params) => {
@@ -144,8 +138,8 @@ module({
     tags: ['blocks', 'esp', 'xray']
 });
 module({
-    group: 'special',
-    name: 'ESP',
+    group: 'esp',
+    name: 'ФУНКЦИЯ ХИТБОКСОВ',
     component: 'EntityESP',
     path: 'entity-esp',
     tags: ['entity', 'entities', 'esp']
@@ -690,4 +684,5 @@ module({
 
 
 export { modules }
+
 
