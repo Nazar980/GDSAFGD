@@ -33,7 +33,7 @@ public class KeyBindingsController {
         KeyMapping.Category category = KeyMapping.Category.register(Identifier.fromNamespaceAndPath(ModMain.MODID, "common"));
 
         keys = new KeyMapping[KeyBindingsConfig.KeysCount];
-        for (int i = 0; i < keys.length; i++) {
+        for (int i = 1; i < keys.length; i++) {
             keys[i] = new KeyMapping("key.zergatul.cheatutils.reserved" + i, InputConstants.UNKNOWN.getValue(), category);
         }
 
@@ -46,7 +46,7 @@ public class KeyBindingsController {
 
     public void assign(int index, String name) {
         String[] bindings = ConfigStore.instance.getConfig().keyBindingsConfig.bindings;
-        for (int i = 0; i < bindings.length; i++) {
+        for (int i = 1; i < bindings.length; i++) {
             if (bindings[i] != null && bindings[i].equals(name)) {
                 actions[i] = Optional.empty();
                 bindings[i] = null;
@@ -72,7 +72,7 @@ public class KeyBindingsController {
             return;
         }
 
-        for (int i = 0; i < keys.length; i++) {
+        for (int i = 1; i < keys.length; i++) {
             KeyMapping key = keys[i];
             Optional<AsyncRunnable> action = actions[i];
             while (key.consumeClick()) {
