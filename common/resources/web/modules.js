@@ -502,63 +502,63 @@ module({
     tags: ['key', 'bindings', 'scripting']
 });
 module({
-    group: 'scripting1',
+    group: 'scripting',
     name: 'Status Overlay',
     component: 'StatusOverlay',
     path: 'status-overlay',
     tags: ['status', 'overlay', 'f3']
 });
 module({
-    group: 'scripting1',
+    group: 'scripting',
     name: 'Events Scripting',
     component: 'EventsScripting',
     path: 'events-scripting',
     tags: ['events', 'tick', 'scripting']
 });
 module({
-    group: 'scripting1',
+    group: 'scripting',
     name: 'Block Automation',
     component: 'BlockAutomation',
     path: 'block-automation',
     tags: ['scripted', 'block', 'placer', 'automation']
 });
 module({
-    group: 'scripting1',
+    group: 'scripting',
     name: 'Exec',
     component: 'Exec',
     path: 'exec',
     tags: ['exec']
 });
 module({
-    group: 'scripting1',
+    group: 'scripting',
     name: 'Villager Roller',
     component: 'VillagerRoller',
     path: 'villager-roller',
     tags: ['villager', 'roller']
 });
 module({
-    group: 'scripting1',
+    group: 'scripting',
     name: 'TPS',
     component: 'Tps',
     path: 'tps',
     tags: ['tps', 'tick', 'rate']
 });
 module({
-    group: 'scripting1',
+    group: 'scripting',
     name: 'Debug',
     component: 'Debugging',
     path: 'debugging',
     tags: ['script', 'debug']
 });
 module({
-    group: 'scripting1',
+    group: 'scripting',
     name: 'Editor Config',
     component: 'MonacoEditorConfig',
     path: 'editor-config',
     tags: ['script', 'editor', 'config', 'monaco']
 });
 module({
-    group: 'scripting1',
+    group: 'scripting',
     name: 'LLM Guide.md',
     component: 'LLM-Guide',
     tags: ['llm', 'guide', 'docs', 'documentation'],
@@ -568,7 +568,7 @@ module({
     }
 });
 module({
-    group: 'scripting1',
+    group: 'scripting',
     name: 'LLM API.txt',
     component: 'LLM-API',
     tags: ['llm', 'api', 'docs', 'documentation'],
@@ -578,7 +578,7 @@ module({
     }
 });
 module({
-    group: 'scripting1',
+    group: 'scripting',
     name: 'Language Docs',
     component: 'LanguageDocs',
     tags: ['scripting', 'language', 'docs', 'documentation'],
@@ -597,7 +597,7 @@ module({
     }
 });
 module({
-    group: 'scripting1',
+    group: 'scripting',
     name: 'Script Examples',
     component: 'Script Examples',
     tags: ['script', 'examples', 'docs', 'documentation'],
@@ -688,4 +688,5 @@ module({
 });
 
 export { modules }
+
 
