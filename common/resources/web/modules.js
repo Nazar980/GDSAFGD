@@ -7,7 +7,7 @@ const modules = {
     esp: {},
     hacks1: {},
     visuals1: {},
-    scripting1: {},
+    scripting: {},
     utility1: {}
 };
 
@@ -495,7 +495,7 @@ module({
 // Scripting Modules ======================
 
 module({
-    group: 'scripting1',
+    group: 'scripting',
     name: 'Key Bindings',
     component: 'KeyBindingScripts',
     path: 'key-bindings',
@@ -688,3 +688,4 @@ module({
 });
 
 export { modules }
+
